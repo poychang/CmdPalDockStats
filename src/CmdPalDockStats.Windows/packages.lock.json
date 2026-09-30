@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dependencies": {
+    "net10.0-windows7.0": {
+      "cmdpaldockstats.contracts": {
+        "type": "Project"
+      },
+      "cmdpaldockstats.core": {
+        "type": "Project",
+        "dependencies": {
+          "CmdPalDockStats.Contracts": "[1.0.0, )"
+        }
+      }
+    },
+    "net10.0-windows7.0/win-arm64": {},
+    "net10.0-windows7.0/win-x64": {}
+  }
+}

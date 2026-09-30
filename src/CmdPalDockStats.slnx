@@ -1,0 +1,20 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="ARM64" />
+  </Configurations>
+  <Project Path="CmdPalDockStats.Contracts/CmdPalDockStats.Contracts.csproj" />
+  <Project Path="CmdPalDockStats.Core/CmdPalDockStats.Core.csproj" />
+  <Project Path="CmdPalDockStats.Windows/CmdPalDockStats.Windows.csproj" />
+  <Project Path="CmdPalDockStats.SensorHost/CmdPalDockStats.SensorHost.csproj" />
+  <Project Path="CmdPalDockStats.Extension/CmdPalDockStats.Extension.csproj">
+    <Platform Solution="*|Any CPU" Project="x64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|ARM64" Project="ARM64" />
+  </Project>
+  <Folder Name="/Tests/">
+    <Project Path="../tests/CmdPalDockStats.Tests/CmdPalDockStats.Tests.csproj" />
+    <Project Path="../tests/CmdPalDockStats.IntegrationTests/CmdPalDockStats.IntegrationTests.csproj" />
+  </Folder>
+</Solution>

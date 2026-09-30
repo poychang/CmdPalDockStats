@@ -1,7 +1,7 @@
 # CmdPalDockStats 開發計畫
 
 日期：2026-09-30  
-狀態：規劃文件；尚未建立應用程式或完成 Windows 實機驗證。
+狀態：已建立可建置的開發原型；通過核心、Windows Provider 與一般權限 GPU 溫度 IPC 測試，尚未完成 Dock、CPU 溫度與提權的端到端實機驗證。
 
 ## 1. 專案目標
 
@@ -380,3 +380,14 @@ Core 不引用 Command Palette SDK 或 LHM；依賴透過介面隔離。初期�
 ## 16. 開始開發時的執行順序
 
 先完成 M0 的「真實 CPU 溫度 → SensorHost → Extension → Dock」垂直切片，再實作一般指標、自選配置及硬體覆蓋。任何溫度感測阻礙應在早期明確揭露，不能拖到 UI 與安裝包全部完成才處理。
+
+## 17. 開發原型進度（2026-09-30）
+
+- 已參考 CmdPalTranslator 建立 .NET 10 solution、集中套件版本、NuGet lock files、COM 啟動、MSIX manifest、建置腳本與 Windows CI。
+- 已建立 Extension、Core、Contracts、Windows、SensorHost，以及單元與整合測試專案。
+- 已實作固定 ID 的 My Stats Band、溫度優先 Sensor Explorer、精確來源選取、新增／移除／排序／名稱／單位／頻率設定及診斷頁；宿主中的互動與重繪仍待驗證。
+- 已實作 Windows CPU／RAM／磁碟／網路／電池 Provider、狀態與過期處理、原子設定保存及損毀還原。
+- 一般權限實測：i9-13900H 的 CPU 溫度感測器可列舉，但讀值不可用；RTX 4070 Laptop GPU 的 Core／Hot Spot／Memory Junction 溫度可讀取並通過 SensorHost Pipe 往返測試。未將 CPU 的 null 值推定為特定權限或驅動問題。
+- x64 solution 建置、固定版本還原、10 個測試及未簽章 MSIX／自包含 SensorHost 產生已通過；未執行套件簽章、安裝、提權或驅動安裝。
+- M0 尚未完成：真實 CPU 溫度出現在 Dock、同帳號提權 IPC、實際 Dock 更新與排序，以及第二台硬體測試仍為必要驗收門檻。
+- 原型尚未實作按需啟用硬體、自動溫度選取策略、低頻儲存／電池採樣、helper watchdog、穩定實體磁碟指紋、硬體重新掃描與省電排程。詳見 `docs/compatibility.md` 與 `docs/decisions/0001-architecture.md`。
